@@ -17,6 +17,15 @@ Important functions:
 - and_net.spikes_to_current(neuron, conversion_factor): calculates an average output current based on the frequency of output spikes from a given neuron. Conversion factor is multiplied by spike frequency for current output.
 - and_net.spikes_to_binary(neuron, threshold): checks if the given neuron is spiking at or above the threshold frequency. If so, return 1, else return 0.
 
+### lif_connection.py
+
+Structure:
+
+- self.start: the first neuron in the connection
+- self.end: the second neuron in the connection
+- self.weight: the weight of the connection
+- self.id: a string to identify the connection
+
 ### lif_neuron.py
 
 Structure:
