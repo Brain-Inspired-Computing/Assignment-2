@@ -25,13 +25,15 @@ class and_net:
 
         input_neuron_x = lif_neuron(id="input_neuron_x")
         input_neuron_y = lif_neuron(id="input_neuron_y")
+        teach_neuron = lif_neuron(id="teach_neuron")
         output_neuron = lif_neuron(id="output_neuron")
         
         x_to_output = lif_connection(start=input_neuron_x, end=output_neuron, weight=1, id="x_to_output")
         y_to_output = lif_connection(start=input_neuron_y, end=output_neuron, weight=1, id="y_to_output")
+        teach_to_output = lif_connection(start=teach_neuron, end=output_neuron, weight=1, id="teach_to_output")
 
-        self.neurons = [input_neuron_x, input_neuron_y, output_neuron]
-        self.connections = [x_to_output, y_to_output]
+        self.neurons = [input_neuron_x, input_neuron_y, teach_neuron, output_neuron]
+        self.connections = [x_to_output, y_to_output, teach_neuron]
 
         return
 
@@ -49,7 +51,12 @@ class and_net:
             return 1
 
         return 0
-
-    # TODO
-    def learn_idk(self):
-        pass
+    
+    # Converts a single bit into spikes
+    def binary_to_spikes(self, val):
+        return 1
+    
+    # Runs the neural net
+    def run_net(self, input):
+        output = []
+        return output
