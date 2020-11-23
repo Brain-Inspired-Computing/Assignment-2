@@ -8,15 +8,15 @@ class and_net:
         self.neurons = [] # A list of lif_neuron objects
         self.connections = [] # A list of lif_connection objects
 
-    # Function calculates current from neuron's output activity
-    def spikes_to_current(self, neuron, conversion_factor):
+    # Function calculates current from an array of spikes from a neuron's output activity
+    def spikes_to_current(self, a_spikes, conversion_factor):
 
         spike_count = 0
-        for i in range(len(neuron.output)):
-            if neuron.output[i] == 1:
+        for i in range(len(a_spikes)):
+            if a_spikes[i] == 1:
                 spike_count += 1
         
-        spikes_per_second = spike_count / (len(neuron.output) / neuron.time_step)
+        spikes_per_second = spike_count / len(a_spikes)
 
         return spikes_per_second * conversion_factor
 
@@ -52,9 +52,23 @@ class and_net:
 
         return 0
     
-    # Converts a single bit into spikes
-    def binary_to_spikes(self, val):
-        return 1
+    # Converts a single bit into 1000 ms array of spikes
+    # A value of 0 makes 5Hz spikes
+    # A value of 1 makes 15Hz spikes
+    def binary_to_spikes(self, val, nsteps=1000):
+
+        a_spikes = [0] * nsteps
+        nspikes = 5
+
+        if(val == 1):
+            nspikes = 15
+
+        interval = int(nsteps / nspikes)
+        for i in range(1000):
+            if(i % interval == 0):
+                a_spikes[i] = 1
+
+        return a_spikes
     
     # Runs the neural net
     def run_net(self, input):
