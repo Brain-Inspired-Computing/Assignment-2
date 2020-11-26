@@ -18,7 +18,7 @@ class and_net:
         
         spikes_per_second = spike_count / len(a_spikes)
 
-        return spikes_per_second * conversion_factor
+        return spikes_per_second * conversion_factor * 100000
 
     # Configure the network to solve problem 3
     def create_simple_net(self):
@@ -33,7 +33,7 @@ class and_net:
         teach_to_output = lif_connection(start=teach_neuron, end=output_neuron, weight=1, id="teach_to_output")
 
         self.neurons = [input_neuron_x, input_neuron_y, teach_neuron, output_neuron]
-        self.connections = [x_to_output, y_to_output, teach_neuron]
+        self.connections = [x_to_output, y_to_output, teach_to_output]
 
         return
 
@@ -76,6 +76,7 @@ class and_net:
         # Initializes a current for the three input neurons
         xIn = self.spikes_to_current(self.binary_to_spikes(input[0]), self.connections[0].weight)
         yIn = self.spikes_to_current(self.binary_to_spikes(input[1]), self.connections[1].weight)
+        # Change and to xor/or
         teachIn = self.spikes_to_current(self.binary_to_spikes(input[1] and input[0]), self.connections[2].weight)
         self.neurons[0].sim(xIn, 1000)
         self.neurons[1].sim(yIn, 1000)
@@ -83,8 +84,9 @@ class and_net:
         # Calculates the input current for the output by using an or function on all 3 spike outputs 
         outIn = []
         for i in range(1000):
-            outIn[i] = self.neurons[0].output[i] or self.neurons[1].output[i] or self.neurons[2].output[i]
+            outIn.append(self.neurons[0].output[i] or self.neurons[1].output[i] or self.neurons[2].output[i])
         self.neurons[3].sim(self.spikes_to_current(outIn, 1), 1000)
+        output = 0
         for i in range(1000):
             output = output + self.neurons[3].output[i]
         if output > 5:
