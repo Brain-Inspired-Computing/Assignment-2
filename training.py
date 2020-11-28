@@ -23,24 +23,27 @@ def raster_plot(net):
     plt.ylabel('Input Neuron 1')
     for i in range(1000):
         if net.neurons[0].output[i] == 1:
-            fmt = '[|][-][k]'
-            plt.plot(fmt)
+            #fmt = '[|][-][k]'
+            #plt.plot(fmt)
+            plt.axvline(i)
 
     plt.subplot(3, 1, 2)
     plt.xlabel('Time')
     plt.ylabel('Input Neuron 2')
     for j in range(1000):
         if net.neurons[1].output[j] == 1:
-            fmt = '[|][-][k]'
-            plt.plot(fmt)
+            #fmt = '[|][-][k]'
+            #plt.plot(fmt)
+            plt.axvline(j)
 
     plt.subplot(3, 1, 3)
     plt.xlabel('Time')
     plt.ylabel('Output Neuron')
     for k in range(1000):
         if net.neurons[3].output[k] == 1:
-            fmt = '[|][-][k]'
-            plt.plot(fmt)
+            #fmt = '[|][-][k]'
+            #plt.plot(fmt)
+            plt.axvline(k)
 
     plt.show()
 
