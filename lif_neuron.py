@@ -4,7 +4,7 @@ by Peter Tilton
 """
 
 import numpy as np
-import matplotlib.pyplot as plt
+#import matplotlib.pyplot as plt
 
 class lif_neuron:
     def __init__(self, capacitance=10000, resistance=500, time_step=1, id="", debug=True):
@@ -35,7 +35,7 @@ class lif_neuron:
         # Adding to activity tracking arrays
         for i in range(len(self.output)-n_steps, len(self.output)):
             self.input[i] = current # Adding current voltage to neuron sim
-            if(self.debug): print("Input is " + str(self.input[i]) + " mA at " + str(i) + " ms.")
+            #if(self.debug): print("Input is " + str(self.input[i]) + " mA at " + str(i) + " ms.")
 
             # Simulating the next time step
             new_output = 0 # Default to no new spike
@@ -45,11 +45,11 @@ class lif_neuron:
             if (new_potential > self.capacitance):
                 new_potential = 0
                 new_output = 1 # Spike time!
-                if(self.debug): print("Spike at " + str(i) + " ms.")
+                #if(self.debug): print("Spike at " + str(i) + " ms.")
 
             self.potential[i] = new_potential # Adding new potential to neuron sim
             self.output[i] = new_output # Adding spike to neuron sim
-            if(self.debug): print("Potential is " + str(self.potential[i]) + " at " + str(i) + " ms.")
+            #if(self.debug): print("Potential is " + str(self.potential[i]) + " at " + str(i) + " ms.")
         return 0
 
     def clear(self):
@@ -58,6 +58,7 @@ class lif_neuron:
         self.output = np.array([0])
         return 0
 
+    """
     def plot_activity(self):
         #fig = plt.figure()
         ax = plt.axes()
@@ -91,3 +92,4 @@ class lif_neuron:
             title="LIF Neuron Simulation: Rate as Function of Current"
         )
         return ax
+"""
