@@ -73,7 +73,6 @@ class and_net:
         # Initializes a current for the three input neurons
         xIn = self.spikes_to_current(self.binary_to_spikes(input[0]), self.connections[0].weight)
         yIn = self.spikes_to_current(self.binary_to_spikes(input[1]), self.connections[1].weight)
-        # Change and to xor/or
         #teachIn = self.spikes_to_current(self.binary_to_spikes(input[1] and input[0]), self.connections[2].weight)
         self.neurons[0].sim(xIn, time)
         self.neurons[1].sim(yIn, time)
@@ -81,9 +80,13 @@ class and_net:
         # Calculates the input current for the output by using an or function on all 3 spike outputs 
         outIn = []
         for i in range(time):
-            if(self.neurons[0].output[i] == 1 and self.neurons[1].output[i] == 1):
+            #Change to and, or, ^
+            if(self.neurons[0].output[i] ^ self.neurons[1].output[i]):
                 outIn.append(1)
             else:
                 outIn.append(0)
         #Conversion factor scales # of spikes from output
-        self.neurons[3].sim(self.spikes_to_current(outIn, .7), time)
+        #AND: .7
+        #OR: .06
+        #XOR: .6
+        self.neurons[3].sim(self.spikes_to_current(outIn, .6), time)

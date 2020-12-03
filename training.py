@@ -4,6 +4,9 @@ from and_net import and_net
 net = and_net([], [])
 net.create_simple_net()
 # X at [0], Y at [1], Teacher at [2]
+# AND: .6, .4
+# OR: .5, .5
+# XOR: .6, .4
 net.connections[0].weight = .6
 net.connections[1].weight = .4
 net.connections[2].weight = 1
@@ -95,7 +98,8 @@ for r in range(runs):
     x_spikes = sum(net.neurons[0].output)
     y_spikes = sum(net.neurons[1].output)
     o_spikes = sum(net.neurons[3].output)
-    print((data[r][0] and data[r][1]), "||", net.spikes_to_binary(net.neurons[3]), "\nX =", 
+    #Change operator to and, or, ^
+    print((data[r][0] ^ data[r][1]), "||", net.spikes_to_binary(net.neurons[3]), "\nX =", 
     net.connections[0].weight, x_spikes, "\nY =", net.connections[1].weight, y_spikes, "\n", o_spikes, "\n")
     for i in range(4):
         net.neurons[i].clear()
