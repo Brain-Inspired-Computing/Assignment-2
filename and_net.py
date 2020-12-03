@@ -10,7 +10,7 @@ class and_net:
         self.neurons = []  # A list of lif_neuron objects
         self.connections = []  # A list of lif_connection objects
 
-    run_time = 1000
+    run_time = 100
 
     # Function calculates current from an array of spikes from a neuron's output activity
     def spikes_to_current(self, a_spikes, conversion_factor):
@@ -35,7 +35,7 @@ class and_net:
         return
 
     # Prepare an output of 1 or 0 based on the spike frequency of the output neuron
-    def spikes_to_binary(self, output_neuron, threshold=4):
+    def spikes_to_binary(self, output_neuron, threshold=5):
 
         spike_count = 0
         for i in range(len(output_neuron.output)):
@@ -81,16 +81,9 @@ class and_net:
         # Calculates the input current for the output by using an or function on all 3 spike outputs 
         outIn = []
         for i in range(time):
-            if(self.neurons[0].output[i] == 1 or self.neurons[1].output[i] == 1):
+            if(self.neurons[0].output[i] == 1 and self.neurons[1].output[i] == 1):
                 outIn.append(1)
             else:
                 outIn.append(0)
         #Conversion factor scales # of spikes from output
-        self.neurons[3].sim(self.spikes_to_current(outIn, .5), time)
-        output = 0
-        for i in range(time):
-            output = output + self.neurons[3].output[i]
-        if output > 5:
-            return 1
-        else:
-            return 0
+        self.neurons[3].sim(self.spikes_to_current(outIn, .7), time)
