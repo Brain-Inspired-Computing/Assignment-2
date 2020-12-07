@@ -7,7 +7,7 @@ import numpy as np
 #import matplotlib.pyplot as plt
 
 class lif_neuron:
-    def __init__(self, capacitance=10000, resistance=500, time_step=1, id="", debug=True):
+    def __init__(self, capacitance=10000, resistance=500, time_step=1, id="", debug=False):
         self.debug = debug
 
         # Properties
@@ -53,9 +53,13 @@ class lif_neuron:
         return 0
 
     def clear(self):
-        self.input = np.array([0])
-        self.potential = np.array([0])
-        self.output = np.array([0])
+        self.input.resize(1)
+        self.potential.resize(1)
+        self.output.resize(1)
+
+        self.input[0] = 0
+        self.potential[0] = 0
+        self.output[0] = 0
         return 0
 
     """
