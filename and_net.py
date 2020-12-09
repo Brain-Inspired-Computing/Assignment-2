@@ -81,7 +81,7 @@ class and_net:
         outIn = []
         for i in range(time):
             #Change to and, or, ^
-            if(self.neurons[0].output[i] ^ self.neurons[1].output[i]):
+            if(self.neurons[0].output[i] and self.neurons[1].output[i]):
                 outIn.append(1)
             else:
                 outIn.append(0)
@@ -89,4 +89,4 @@ class and_net:
         #AND: .7
         #OR: .06
         #XOR: .6
-        self.neurons[3].sim(self.spikes_to_current(outIn, .6), time)
+        self.neurons[3].sim(self.spikes_to_current(outIn, .7), time)
