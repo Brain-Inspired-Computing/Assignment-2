@@ -68,7 +68,6 @@ class and_net:
         return a_spikes
 
     # Runs the neural net
-    # Maybe include option to run without training neuron
     def run_net(self, input, time = run_time):
         # Initializes a current for the three input neurons
         xIn = self.spikes_to_current(self.binary_to_spikes(input[0]), self.connections[0].weight)

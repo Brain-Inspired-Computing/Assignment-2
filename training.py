@@ -76,7 +76,7 @@ for r in range(runs):
         # Sets a_corr value
         a_corr_x = w_max - net.connections[0].weight
         a_corr_y = w_max - net.connections[1].weight
-        # If the rate is below 5, set value to 0
+        # If the rate is below 105, set value to 0
         if v_x <= 10:
             v_x = 0
         if v_y <= 10:
@@ -84,7 +84,6 @@ for r in range(runs):
         if v_o <= 10:
             v_o = 0
         # Hebb with postsynaptic LTP/LTD threshold
-        # TODO change .01 to something else?
         net.connections[0].weight += a_corr_x * v_x * (v_o - .01)
         net.connections[1].weight += a_corr_y * v_y * (v_o - .01)
         if net.connections[0].weight < 0:
@@ -99,8 +98,8 @@ for r in range(runs):
     y_spikes = sum(net.neurons[1].output)
     o_spikes = sum(net.neurons[3].output)
     # Change operator to and, or, ^
-    print((data[r][0] and data[r][1]), "||", net.spikes_to_binary(net.neurons[3]), "\nX =",
-          net.connections[0].weight, x_spikes, "\nY =", net.connections[1].weight, y_spikes, "\n", o_spikes, "\n")
+    #print((data[r][0] and data[r][1]), "||", net.spikes_to_binary(net.neurons[3]), "\nX =",
+    #      net.connections[0].weight, x_spikes, "\nY =", net.connections[1].weight, y_spikes, "\n", o_spikes, "\n")
 
     raster_plot(net, time)
     for i in range(4):
